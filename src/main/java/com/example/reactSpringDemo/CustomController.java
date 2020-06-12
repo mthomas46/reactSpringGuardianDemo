@@ -17,7 +17,7 @@ import java.util.Arrays;
 public class CustomController{
     private RestTemplate restTemplate;
     private HttpHeaders headers;
-    @GetMapping(value = "/import-Guardian", produces = "application/jason")
+    @GetMapping(value = "/import-Guardian")
     public String importGuardian(@RequestParam(name = "displayName", required = true) String name) throws JsonProcessingException {
         restTemplate = new RestTemplate();
         headers = new HttpHeaders();
@@ -29,6 +29,8 @@ public class CustomController{
         String body = restTemplate.exchange(uri, HttpMethod.GET, entity, String.class).getBody();
         ObjectMapper objectMapper = new ObjectMapper();
 
-        return objectMapper.readValue(body, GuardianResponse.class).toString();
+        GuardianResponse GR= objectMapper.readValue(body, GuardianResponse.class);
+
+        return objectMapper.writeValueAsString(GR);
     }
 }

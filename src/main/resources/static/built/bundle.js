@@ -49937,6 +49937,7 @@ var client = __webpack_require__(/*! ./client */ "./src/main/js/client.js");
 
 
 
+
 var App = /*#__PURE__*/function (_React$Component) {
   _inherits(App, _React$Component);
 
@@ -49949,7 +49950,8 @@ var App = /*#__PURE__*/function (_React$Component) {
 
     _this = _super.call(this, props);
     _this.state = {
-      guardians: []
+      guardians: [],
+      foundGuardians: []
     };
     return _this;
   }
@@ -49967,6 +49969,16 @@ var App = /*#__PURE__*/function (_React$Component) {
           guardians: response.entity._embedded.guardians
         });
       });
+      client({
+        method: 'GET',
+        path: "/import-Guardian?displayName=afroKing42"
+      }).done(function (response) {
+        console.log(response.entity.Response);
+
+        _this2.setState({
+          foundGuardians: response.entity.Response
+        });
+      });
     }
   }, {
     key: "render",
@@ -49975,22 +49987,48 @@ var App = /*#__PURE__*/function (_React$Component) {
         guardians: this.state.guardians
       }), /*#__PURE__*/React.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_0__["Button"], {
         variant: "primary"
-      }, "Primary"), ' ');
+      }, "Primary2"), ' ', /*#__PURE__*/React.createElement(FoundGuardians, {
+        foundGuardians: this.state.foundGuardians
+      }));
     }
   }]);
 
   return App;
 }(React.Component);
 
-var GuardianList = /*#__PURE__*/function (_React$Component2) {
-  _inherits(GuardianList, _React$Component2);
+var FoundGuardians = /*#__PURE__*/function (_React$Component2) {
+  _inherits(FoundGuardians, _React$Component2);
 
-  var _super2 = _createSuper(GuardianList);
+  var _super2 = _createSuper(FoundGuardians);
+
+  function FoundGuardians() {
+    _classCallCheck(this, FoundGuardians);
+
+    return _super2.apply(this, arguments);
+  }
+
+  _createClass(FoundGuardians, [{
+    key: "render",
+    value: function render() {
+      var foundList = this.props.foundGuardians.map(function (fg) {
+        return /*#__PURE__*/React.createElement("tr", null, /*#__PURE__*/React.createElement("td", null, fg.displayName), " ", /*#__PURE__*/React.createElement("td", null, fg.membershipId));
+      });
+      return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("div", null, "RESULTS Via Destiny  API"), /*#__PURE__*/React.createElement("table", null, /*#__PURE__*/React.createElement("tbody", null, /*#__PURE__*/React.createElement("tr", null, /*#__PURE__*/React.createElement("th", null, "displayName"), /*#__PURE__*/React.createElement("th", null, "membershipId")), foundList)));
+    }
+  }]);
+
+  return FoundGuardians;
+}(React.Component);
+
+var GuardianList = /*#__PURE__*/function (_React$Component3) {
+  _inherits(GuardianList, _React$Component3);
+
+  var _super3 = _createSuper(GuardianList);
 
   function GuardianList() {
     _classCallCheck(this, GuardianList);
 
-    return _super2.apply(this, arguments);
+    return _super3.apply(this, arguments);
   }
 
   _createClass(GuardianList, [{
@@ -50002,22 +50040,22 @@ var GuardianList = /*#__PURE__*/function (_React$Component2) {
           guardian: guardian
         });
       });
-      return /*#__PURE__*/React.createElement("table", null, /*#__PURE__*/React.createElement("tbody", null, /*#__PURE__*/React.createElement("tr", null, /*#__PURE__*/React.createElement("th", null, "displayName"), /*#__PURE__*/React.createElement("th", null, "membershipId")), guardians));
+      return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("div", null, "CURRENTLY IN DATABASE"), /*#__PURE__*/React.createElement("table", null, /*#__PURE__*/React.createElement("tbody", null, /*#__PURE__*/React.createElement("tr", null, /*#__PURE__*/React.createElement("th", null, "displayName"), /*#__PURE__*/React.createElement("th", null, "membershipId")), guardians)));
     }
   }]);
 
   return GuardianList;
 }(React.Component);
 
-var Guardian = /*#__PURE__*/function (_React$Component3) {
-  _inherits(Guardian, _React$Component3);
+var Guardian = /*#__PURE__*/function (_React$Component4) {
+  _inherits(Guardian, _React$Component4);
 
-  var _super3 = _createSuper(Guardian);
+  var _super4 = _createSuper(Guardian);
 
   function Guardian() {
     _classCallCheck(this, Guardian);
 
-    return _super3.apply(this, arguments);
+    return _super4.apply(this, arguments);
   }
 
   _createClass(Guardian, [{
